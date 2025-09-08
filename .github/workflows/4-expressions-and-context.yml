@@ -9,7 +9,6 @@ jobs:
         run: |
           echo "=== Basic String Functions ==="
           echo "Original: ${{ github.ref }}"
-          #echo "Replace: ${{ replace(github.ref, 'refs/heads/', '') }}"
           echo "Upper: ${{ upper(github.ref_name) }}"
           echo "Lower: ${{ lower(github.ref_name) }}"
           
@@ -39,8 +38,6 @@ jobs:
           SAMPLE_STRING: "feature/user-authentication-v2"
         run: |
           echo "=== Advanced Examples ==="
-          # Extract part after last slash
-          echo "Branch type: ${{ replace(env.SAMPLE_STRING, 'feature/', '') }}"
           # Chain multiple functions
           echo "Clean uppercase: ${{ upper(replace(github.ref, 'refs/heads/', '')) }}"
           # Complex conditionals with strings
