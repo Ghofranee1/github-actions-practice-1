@@ -1,4 +1,4 @@
-name: 4- String Functions Reference
+name: String Functions Reference
 on: workflow_dispatch
 
 jobs:
@@ -8,8 +8,8 @@ jobs:
       - name: Core String Functions
         run: |
           echo "=== Basic String Functions ==="
-          echo "Original: ${{ github.ref }}"
-          
+          echo "Original ref: ${{ github.ref }}"
+          echo "Branch name: ${{ github.ref_name }}"
           
       - name: String Testing Functions
         run: |
@@ -21,46 +21,75 @@ jobs:
       - name: JSON and Formatting Functions
         run: |
           echo "=== JSON and Format Functions ==="
-          # toJSON - converts to JSON string
-          echo "Context as JSON: ${{ toJSON(github) }}"
-          # fromJSON - parses JSON (useful with outputs)
-          echo "Parse JSON: ${{ fromJSON('{"key": "value"}').key }}"
+          # toJSON - converts to JSON string (simplified to avoid issues)
+          echo "Repository name: ${{ github.repository }}"
+          echo "Actor: ${{ github.actor }}"
+          # fromJSON example with simple JSON
+          echo "Parse JSON example: ${{ fromJSON('{"env": "production"}').env }}"
           
       - name: Hash Functions
         run: |
           echo "=== Hash Functions ==="
-          echo "SHA256 of branch: ${{ hashFiles('**/package*.json') }}"
-          # Note: hashFiles is for file hashing, not string hashing
+          # hashFiles works with file patterns, not strings
+          echo "Hash of workflow files: ${{ hashFiles('.github/workflows/*.yml') }}"
+          echo "Hash of all files: ${{ hashFiles('**') }}"
           
       - name: Advanced String Manipulation
         env:
           SAMPLE_STRING: "feature/user-authentication-v2"
+          BRANCH_NAME: ${{ github.ref_name }}
         run: |
           echo "=== Advanced Examples ==="
-          # Complex conditionals with strings
-          echo "Deploy target: ${{ 
-            contains(github.ref_name, 'main') && 'production' || 
-            startsWith(github.ref_name, 'feature/') && 'staging' || 
-            'development' 
-          }}"
+          echo "Sample string: $SAMPLE_STRING"
+          echo "Current branch: $BRANCH_NAME"
+          
+          # Use shell-based string manipulation instead
+          if [[ "$BRANCH_NAME" == *"main"* ]]; then
+            echo "Branch contains 'main'"
+          fi
+          
+          if [[ "$BRANCH_NAME" == feature/* ]]; then
+            echo "Branch starts with 'feature/'"
+          fi
 
   conditional-logic:
     runs-on: ubuntu-latest
     steps:
-      - name: Complex String Conditions
+      - name: Simple String Conditions
         run: |
-          echo "=== Complex String Logic ==="
-          # Multiple conditions
-          echo "Is deployable: ${{ 
-            github.ref_name == 'main' || 
-            startsWith(github.ref_name, 'release/') || 
-            startsWith(github.ref_name, 'hotfix/') 
-          }}"
+          echo "=== String Logic with GitHub Context ==="
+          echo "Is main branch: ${{ github.ref_name == 'main' }}"
+          echo "Contains main: ${{ contains(github.ref_name, 'main') }}"
+          echo "Starts with feature: ${{ startsWith(github.ref_name, 'feature/') }}"
           
-          # Nested conditionals
-          echo "Environment: ${{ 
+      - name: Deployment Logic
+        run: |
+          echo "=== Deployment Decision Logic ==="
+          # Use proper conditional syntax
+          DEPLOY_TARGET="${{ 
+            github.ref_name == 'main' && 'production' || 
+            (startsWith(github.ref_name, 'feature/') && 'staging' || 'development')
+          }}"
+          echo "Deploy target: $DEPLOY_TARGET"
+          
+      - name: Environment Assignment
+        env:
+          ENVIRONMENT: ${{ 
             github.ref_name == 'main' && 'prod' || 
             (startsWith(github.ref_name, 'release/') && 'staging' || 'dev')
-          }}"
+          }}
+        run: |
+          echo "Environment: $ENVIRONMENT"
           
-          echo "Short branch name: ${{ contains(github.ref_name, '/') && 'complex' || 'simple' }}"
+      - name: Complex Conditions
+        run: |
+          echo "=== Complex Conditional Logic ==="
+          IS_DEPLOYABLE="${{ 
+            github.ref_name == 'main' || 
+            startsWith(github.ref_name, 'release/') || 
+            startsWith(github.ref_name, 'hotfix/')
+          }}"
+          echo "Is deployable branch: $IS_DEPLOYABLE"
+          
+          BRANCH_TYPE="${{ contains(github.ref_name, '/') && 'feature-branch' || 'main-branch' }}"
+          echo "Branch type: $BRANCH_TYPE"
