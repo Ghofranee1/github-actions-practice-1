@@ -72,15 +72,7 @@ jobs:
           }}"
           echo "Deploy target: $DEPLOY_TARGET"
           
-      - name: Environment Assignment
-        env:
-          ENVIRONMENT: ${{ 
-            github.ref_name == 'main' && 'prod' || 
-            (startsWith(github.ref_name, 'release/') && 'staging' || 'dev')
-          }}
-        run: |
-          echo "Environment: $ENVIRONMENT"
-          
+
       - name: Complex Conditions
         run: |
           echo "=== Complex Conditional Logic ==="
