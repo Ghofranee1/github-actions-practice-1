@@ -1,4 +1,4 @@
-name: GitHub Actions Basics Practice # The name of the workflow
+name: 1- GitHub Actions Basics Practice # The name of the workflow
 
 # Trigger the workflow on push to any branch or manual dispatch
 on:

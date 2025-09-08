@@ -2,7 +2,7 @@
 # This workflow demonstrates handling multiple GitHub events
 # and shows which event triggered the workflow execution
 
-name: Event Name Detector
+name: 2- Event Name Detector
 
 # Define the events that will trigger this workflow
 on:

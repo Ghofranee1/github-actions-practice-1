@@ -2,7 +2,7 @@
 # This workflow demonstrates how to use event filters to optimize CI/CD performance
 # by only running on specific branches and ignoring documentation changes
 
-name: Selective Branch and Path Filtering
+name: 3- Selective Branch and Path Filtering
 
 # Configure the workflow to only trigger under specific conditions
 on:
