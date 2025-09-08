@@ -1,5 +1,8 @@
-name: String Functions Reference
-on: workflow_dispatch
+name: 4- String Functions Reference
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   string-functions-demo:
