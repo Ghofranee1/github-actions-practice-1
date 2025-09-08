@@ -9,7 +9,7 @@ jobs:
         run: |
           echo "=== Basic String Functions ==="
           echo "Original: ${{ github.ref }}"
-          echo "Replace: ${{ replace(github.ref, 'refs/heads/', '') }}"
+          #echo "Replace: ${{ replace(github.ref, 'refs/heads/', '') }}"
           echo "Upper: ${{ upper(github.ref_name) }}"
           echo "Lower: ${{ lower(github.ref_name) }}"
           
@@ -71,21 +71,3 @@ jobs:
           
           # String length approximation (no direct length function)
           echo "Short branch name: ${{ contains(github.ref_name, '/') && 'complex' || 'simple' }}"
-
-  error-examples:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Common Mistakes to Avoid
-        run: |
-          echo "=== Avoid These Mistakes ==="
-          # ❌ These functions DON'T exist in GitHub Actions:
-          # echo "Length: ${{ length(github.ref_name) }}"          # No length function
-          # echo "Substring: ${{ substring(github.ref_name, 0, 5) }}" # No substring function
-          # echo "Split: ${{ split(github.ref_name, '/')[0] }}"      # No split function
-          # echo "Trim: ${{ trim(github.ref_name) }}"                # No trim function
-          # echo "indexOf: ${{ indexOf(github.ref_name, '/') }}"     # No indexOf function
-          
-          # ✅ Use these alternatives instead:
-          echo "Check if complex: ${{ contains(github.ref_name, '/') }}"
-          echo "Extract with replace: ${{ replace(github.ref_name, 'feature/', '') }}"
-          echo "Case conversion: ${{ lower(github.ref_name) }}"
