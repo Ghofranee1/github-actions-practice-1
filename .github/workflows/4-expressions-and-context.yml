@@ -9,8 +9,7 @@ jobs:
         run: |
           echo "=== Basic String Functions ==="
           echo "Original: ${{ github.ref }}"
-          echo "Upper: ${{ upper(github.ref_name) }}"
-          echo "Lower: ${{ lower(github.ref_name) }}"
+          
           
       - name: String Testing Functions
         run: |
@@ -38,8 +37,6 @@ jobs:
           SAMPLE_STRING: "feature/user-authentication-v2"
         run: |
           echo "=== Advanced Examples ==="
-          # Chain multiple functions
-          echo "Clean uppercase: ${{ upper(replace(github.ref, 'refs/heads/', '')) }}"
           # Complex conditionals with strings
           echo "Deploy target: ${{ 
             contains(github.ref_name, 'main') && 'production' || 
@@ -66,5 +63,4 @@ jobs:
             (startsWith(github.ref_name, 'release/') && 'staging' || 'dev')
           }}"
           
-          # String length approximation (no direct length function)
           echo "Short branch name: ${{ contains(github.ref_name, '/') && 'complex' || 'simple' }}"
