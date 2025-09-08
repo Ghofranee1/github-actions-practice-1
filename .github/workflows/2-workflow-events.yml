@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-name: Workflow Events
-on:
-
-jobs:
-=======
 # Event Name Detector Workflow
 # This workflow demonstrates handling multiple GitHub events
 # and shows which event triggered the workflow execution
@@ -30,4 +24,3 @@ jobs:
       # Step to display which event triggered the workflow
       - name: Display Trigger Name
         run: echo "I've been triggered by ${{ github.event_name }} event"
->>>>>>> b27295a5f8f91095f3e4a211238f20409ac21c54

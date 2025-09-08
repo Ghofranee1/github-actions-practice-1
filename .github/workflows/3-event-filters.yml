@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-name: Event Filters
-on:
-
-jobs:
-=======
 # Selective Branch and Path Filtering Workflow
 # This workflow demonstrates how to use event filters to optimize CI/CD performance
 # by only running on specific branches and ignoring documentation changes
@@ -31,4 +25,3 @@ jobs:
       # Display success message with branch information
       - name: Event Filters Working
         run: echo "Event filters working! Triggered on ${{ github.ref_name }} branch"
->>>>>>> b27295a5f8f91095f3e4a211238f20409ac21c54
