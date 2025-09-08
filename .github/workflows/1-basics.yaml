@@ -31,9 +31,7 @@ jobs:
 
   system-job:
     runs-on: ubuntu-latest
-    steps:
-      - name: Show system info
-    
+   
     steps:
       - name: Show system information
         run: |
@@ -42,7 +40,6 @@ jobs:
           echo "Current User: $(whoami)"
           echo "Working Directory: $(pwd)"
 
-      - name: Create test file
       
       - name: Create a simple file
         run: |
